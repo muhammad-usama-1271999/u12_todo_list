@@ -3,22 +3,24 @@
 import inquirer from "inquirer";
 import chalk from "chalk";
 
-let array =[];
+let array:string[] =[];
+let b = [];
+let c = [];
 let condition = true;
-
+console.log(" WELCOME IN TODO LIST ")
 while(condition){
 let todo = await inquirer.prompt(
     [
         {
             name:"rutine",
             type:"input",
-            message:chalk.rgb(150,300,200)("input your rutine in todo list"),
+            message:chalk.rgb(150,300,200)(" input your rutine in todo list "),
         },
         {
             name:"moreTodo",
             type:"confirm",
-            message:chalk.rgb(288,108,350)("Do you want to add more todo in list"),
-            default:"false",
+            message:chalk.rgb(288,108,350)(" Do you want to add more todo in list "),
+            default:"true",
         }
     ]
 );
@@ -33,40 +35,46 @@ while(condition){
         [
             {
                 name:"index1",
-                type:"number",
-                message:chalk.rgb(10,300,130)("enter index number do you want to remove in this todo list"),
-            },
-            {
-               name: "index2",
-               type: "input",
-               message:chalk.rgb(200,150,210)("enter second index number do you want to remove in todo list"),
+                type:"list",
+                message:chalk.rgb(10,300,130)(" Please select in one of this choices, Do you want to remove in this todo list "),
+                choices: array
             },
             {
                 name:"removeMoreTodo",
                 type:"confirm",
-                message:chalk.rgb(150,150,150)("do you want to remove more todo in this list"),
+                message:chalk.rgb(150,150,150)(" do you want to remove more todo in this list "),
                 default:"false",
             }
         ]
     );
-    array.splice(Todo.index1,Todo.index2);
+       b.push(array.splice(array.indexOf(Todo.index1),1));
+    console.log(chalk.blueBright(` these item you remove your todo list "${b}" `));
     condition = Todo.removeMoreTodo;
-
-    console.log(array);
+    console.log( array );
+    
 };
-
+condition = true;
+while(condition){
     let toDo = await inquirer.prompt(
         [
             {
+                name: "concat",
+                type:"input",
+                message:chalk.rgb(300,110,250)(" Do you want again add more todo ")
+            },
+            {
                 name: "con",
-                type: "input",
-                message: "enter list for concatination",
-            }
+                type: "confirm",
+                message: chalk.rgb(290,110,200)(" do you want again add more todo in your todo list "),
+                default:"true"
+            },
         ]
-    )
-    console.log(([toDo.con]));
-array = array.concat([toDo.con]);
+    );
+    c.push(toDo.concat)
+    console.log(([toDo.concat]));
+array = array.concat([toDo.concat]);
+condition = toDo.con;
 
 console.log(array);
 
-
+    }
