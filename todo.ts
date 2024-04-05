@@ -6,27 +6,29 @@ let condition2 = true;
 let array:string[] =[];
 let a:any ;
 
+console.log(chalk.rgb(250,150, 100)("\n\t WELCOME IN TODO LIST \t\n"));
+
 while(condition2){
 
 
 
 let condition = true;
 
-console.log(chalk.rgb(250,150, 100)("\n\t WELCOME IN TODO LIST \t\n"));
+
 
 let todo = await inquirer.prompt([
     {
         name : "item",
         type: "list",
         message: "please select any one option",
-        choices: ["addTodoList", "removeTodoList", "updateTodoList","replaceTodoList", "exitTodoList"]
+        choices: ["ADD TODO", "DELETE TODO", "UPDATE TODO LIST","EXIT TODO LIST"]
     }
 ])
 
 
-if(todo.item == "addTodoList"){
+if(todo.item == "ADD TODO"){
     condition = true;
-    console.log("\n\t WELCOME IN ADD TODO LIST \t\n")
+    console.log("\n\t WELCOME TO ADD TODO LIST \t\n")
 
   while(condition){
    let todo = await inquirer.prompt(
@@ -48,22 +50,23 @@ array.push(todo.rutine);
 condition = todo.moreTodo;
 console.log(array);
   };
-}else if(todo.item === "removeTodoList"){
+}else if(todo.item == "DELETE TODO"){
     
 condition = true;
+console.log("\n\t WELCOME TO DELETE TODO \t\n");
 while(condition){
     let Todo = await inquirer.prompt(
         [
             {
                 name:"index1",
                 type:"list",
-                message:chalk.rgb(10,300,130)(" Please select in one of this choices, Do you want to remove in this todo list "),
+                message:chalk.rgb(10,300,130)(" Please select of these choices, Do you want to delete in this todo list "),
                 choices: array
             },
             {
                 name:"removeMoreTodo",
                 type:"confirm",
-                message:chalk.rgb(150,150,150)(" do you want to remove more todo in this list "),
+                message:chalk.rgb(150,150,150)(" do you want to delete more todo in this list "),
                 default:"false",
             }
         ]
@@ -74,41 +77,17 @@ while(condition){
     console.log( array );
     
 };
-}else if(todo.item === "updateTodoList"){
-condition = true;
-while(condition){
-    let toDo = await inquirer.prompt(
-        [
-            {
-                name: "concat",
-                type:"input",
-                message:chalk.rgb(300,110,250)(" enter new item for update todo list ")
-            },
-            {
-                name: "con",
-                type: "confirm",
-                message: chalk.rgb(290,110,200)(" do you want update more todo in your todo list "),
-                default:"true"
-            },
-        ]
-    );
-    
-array = array.concat([toDo.concat]);
-condition = toDo.con;
-
-console.log(array);
-
-    }
-}else if(todo.item === "replaceTodoList"){
+}else if(todo.item == "UPDATE TODO LIST"){
     
     condition = true;
+    console.log("\n\t WELCOME IN UPDATE TODO LIST \t\n");
     while(condition){
         let Todo = await inquirer.prompt(
             [
                 {
                     name:"index1",
                     type:"list",
-                    message:chalk.rgb(10,300,130)(" Please select in one of this choices, Do you want to replace in this todo list "),
+                    message:chalk.rgb(10,300,130)(" Please select  of these choices, Do you want to replace in this todo list "),
                     choices: array
                 },
                 {
@@ -124,13 +103,14 @@ console.log(array);
                 }
             ]
         );
-            a = array.splice(array.indexOf(Todo.index1),1);
+             array.splice(array.indexOf(Todo.index1),1);
+             a = array.indexOf(Todo.index1);
         array.splice(a,0,Todo.replace)
         condition = Todo.removeMoreTodo;
         console.log( array );
         
     };
-    }else if(todo.item == "exitTodoList"){
+    }else if(todo.item == "EXIT TODO LIST"){
 
     let exit = await inquirer.prompt(
         {
@@ -140,7 +120,7 @@ console.log(array);
             default:"true"
         },
     )
-    console.log(chalk.rgb(260,130,210)("THANK YOU FOR USING MY TODO LIST"));
+    console.log(chalk.rgb(260,130,210)(" \n\t THANK YOU FOR USING MY TODO LIST \t\n"));
     condition2 = !exit.con;
 }
 }
