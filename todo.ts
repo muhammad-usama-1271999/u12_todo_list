@@ -21,7 +21,7 @@ let todo = await inquirer.prompt([
         name : "item",
         type: "list",
         message: "please select any one option",
-        choices: ["ADD TODO", "DELETE TODO", "UPDATE TODO LIST","EXIT TODO LIST"]
+        choices: ["ADD TODO", "DELETE TODO", "UPDATE TODO LIST","CHECK TODO LIST","EXIT TODO LIST"]
     }
 ])
 
@@ -54,6 +54,7 @@ console.log(array);
     
 condition = true;
 console.log("\n\t WELCOME TO DELETE TODO \t\n");
+if(array.length > 0){
 while(condition){
     let Todo = await inquirer.prompt(
         [
@@ -77,8 +78,11 @@ while(condition){
     console.log( array );
     
 };
+}else{
+    console.log("sorry for say, todo list is empty")
+}
 }else if(todo.item == "UPDATE TODO LIST"){
-    
+    if(array.length > 0){
     condition = true;
     console.log("\n\t WELCOME IN UPDATE TODO LIST \t\n");
     while(condition){
@@ -110,6 +114,29 @@ while(condition){
         console.log( array );
         
     };
+    }else{
+        console.log("sorry for say, todo list is empty")
+        
+    }
+    }else if(todo.item == "CHECK TODO LIST"){
+        if(array.length > 0){
+        condition = true;
+        console.log("WELCOME TO CHECK TODO LIST");
+        console.log(array);
+        while(condition){
+        let user = await inquirer.prompt([
+            {
+                name: "exit",
+                type: "confirm",
+                message: "do yo want to exit check todo list",
+                default: "true"
+            }
+        ]);
+        condition = user.exit;
+    }
+    }else{
+        console.log("sorry for say, todo list is empty")
+    }
     }else if(todo.item == "EXIT TODO LIST"){
 
     let exit = await inquirer.prompt(
